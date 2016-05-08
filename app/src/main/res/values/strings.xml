@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Plin</string>
+    <string name="splash_loading">carregando</string>
+</resources>
