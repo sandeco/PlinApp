@@ -31,18 +31,7 @@ public class MainActivity extends Activity {
 
     }
 
-    /*
-    // pegando clique no botão de whatsapp
-    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        if (url != null && url.startsWith("whatsapp://")) {
-            view.getContext().startActivity(
-                    new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-            return true;
-        } else {
-            return false;
-        }
-    }
-    */
+
 
 
     // ATIVANDO BACK NO CELULAR PARA VOLTAR NO SITE
