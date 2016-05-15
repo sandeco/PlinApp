@@ -1,12 +1,12 @@
-package plin.net.br.plin;
+package plin.net.br.plin.activities;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebView;
+
+import plin.net.br.plin.R;
+import plin.net.br.plin.activities.MyWebView;
 
 public class MainActivity extends Activity {
 
@@ -28,6 +28,13 @@ public class MainActivity extends Activity {
 
 
         webView.loadUrl("http://192.168.25.24/plin/");
+
+    }
+
+
+    private boolean isPlinOnline(){
+
+        return false;
 
     }
 

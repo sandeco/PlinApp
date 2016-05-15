@@ -1,20 +1,22 @@
-package plin.net.br.plin;
+package plin.net.br.plin.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.util.Random;
 
-public class splash extends Activity implements Runnable {
+import plin.net.br.plin.R;
+import plin.net.br.plin.service.FindNewPostTask;
+import plin.net.br.plin.service.SyncData;
 
-    private LinearLayout layout;
+public class Splash extends Activity implements Runnable {
+
+    private RelativeLayout screen;
+    private LinearLayout middle;
 
     private Handler handler = new Handler();
 
@@ -27,17 +29,16 @@ public class splash extends Activity implements Runnable {
         choiseBackground();
 
         //esperar 3seg e ir para main
-        handler.postDelayed(this,3000);
+        //handler.postDelayed(this,3000);
+
+        FindNewPostTask task = new FindNewPostTask();
+        task.start();
+
 
     }
 
     private void choiseBackground() {
-        layout = (LinearLayout)findViewById(R.id.splash);
 
-        if(Randomic(1,2)==1)
-            layout.setBackgroundResource(R.drawable.splash01);
-        else
-            layout.setBackgroundResource(R.drawable.splash02);
 
     }
 

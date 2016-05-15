@@ -1,4 +1,4 @@
-package plin.net.br.plin;
+package plin.net.br.plin.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,22 +34,16 @@ class MyWebView extends WebViewClient {
         // String not in Logger.
         if (url != null) {
 
-            if (url.startsWith("whatsapp://")) {
+            if(
+                url.startsWith("whatsapp://") ||
+                url.startsWith("https://twitter.com/") ||
+                url.startsWith("https://plus.google.com/") ||
+                url.startsWith("https://www.facebook.com/")
+            ){
+
                 view.getContext().startActivity(
                         new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-
-                /*
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-                sendIntent.setType("text/plain");
-                sendIntent.setPackage("com.whatsapp");
-                context.startActivity(sendIntent);*/
-
                 return true;
-            } else if (url.startsWith("https://www.facebook.com")) {
-
-                this.sharingToSocialMedia(FACEBOOK,"Titulo facebool","aqui é um compartilhamento do facebook");
 
             } else {
                 return false;

@@ -1,4 +1,16 @@
 <resources>
+
+    <!--STRING DE CONFIGURAÇÕES E VARIÁVEIS DE SISTEMA-->
     <string name="app_name">Plin</string>
+    <string name="last_post">lastPost</string>
+    <string name="wp_id_last_post"></string>
+
+    <string name="ulr_rest_last_post">http://192.168.25.24/plin/wp-json/wp/v2/posts?filter[posts_per_page]=1</string>
+
+
+    <!-- MENSAGENS DE ERRO-->
+    <string name="erro_gravar_post">Erro ao tentar gravar um novo post</string>
+
+    <!-- STRING DE DESING -->
     <string name="plin_splash_loading">carregando</string>
 </resources>
