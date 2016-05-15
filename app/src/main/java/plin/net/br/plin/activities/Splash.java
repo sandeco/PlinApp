@@ -11,6 +11,7 @@ import java.util.Random;
 
 import plin.net.br.plin.R;
 import plin.net.br.plin.service.FindNewPostTask;
+import plin.net.br.plin.service.NewPostService;
 import plin.net.br.plin.service.SyncData;
 
 public class Splash extends Activity implements Runnable {
@@ -29,10 +30,11 @@ public class Splash extends Activity implements Runnable {
         choiseBackground();
 
         //esperar 3seg e ir para main
-        //handler.postDelayed(this,3000);
+        handler.postDelayed(this,3000);
 
-        FindNewPostTask task = new FindNewPostTask();
-        task.start();
+
+        Intent it = new Intent(this, NewPostService.class);
+        this.startService(it);
 
 
     }

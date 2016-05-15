@@ -15,6 +15,8 @@ public class NewPostService extends Service {
 
 
 
+
+
     public NewPostService() {
 
     }
@@ -27,8 +29,8 @@ public class NewPostService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags,int startId) {
-
-        return 0;
+        FindNewPostTask.getInstance().start();
+        return START_STICKY;
     }
 
 }

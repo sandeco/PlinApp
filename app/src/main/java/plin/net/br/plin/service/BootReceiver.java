@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 public class BootReceiver extends BroadcastReceiver {
+
     public BootReceiver() {
     }
 

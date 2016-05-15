@@ -26,6 +26,7 @@ import plin.net.br.plin.model.Post;
 import plin.net.br.plin.util.App;
 import plin.net.br.plin.util.InternetCheck;
 import plin.net.br.plin.util.Notifier;
+import plin.net.br.plin.util.NotifyNewPost;
 
 /**
  * Created by sandeco on 12/05/16.
@@ -50,8 +51,10 @@ public class FindNewPostTask implements Runnable, Response.ErrorListener, Respon
     //objeto de notificação
     private Notifier notifier;
 
+    //SINGLETON
+    private static FindNewPostTask instance;
 
-    public FindNewPostTask() {
+    private FindNewPostTask() {
 
         this.queue = Volley.newRequestQueue(App.getContext());
         this.queue.stop(); // deixando a fila parada
@@ -60,6 +63,17 @@ public class FindNewPostTask implements Runnable, Response.ErrorListener, Respon
         postDao = new PostSPDAO();
 
     }
+
+
+    public static FindNewPostTask getInstance(){
+        if(instance==null){
+            instance = new FindNewPostTask();
+        }
+
+        return instance;
+
+    }
+
 
     @Override
     public void run() {
@@ -99,8 +113,10 @@ public class FindNewPostTask implements Runnable, Response.ErrorListener, Respon
             if(posts.size()==1){
                 Post post = posts.get(0);
                 int idLastpost = postDao.getIdLastPost();
-                if(post.getId()>idLastpost)
+                if(post.getId()>idLastpost) {
                     postDao.setLastPost(post);
+                    NotifyNewPost.notify(post);
+                }
 
             }
 
@@ -119,16 +135,6 @@ public class FindNewPostTask implements Runnable, Response.ErrorListener, Respon
     public void onErrorResponse(VolleyError error) {
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 

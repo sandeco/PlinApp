@@ -1,16 +1,19 @@
 package plin.net.br.plin.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebView;
 
 import plin.net.br.plin.R;
 import plin.net.br.plin.activities.MyWebView;
+import plin.net.br.plin.util.NotifyNewPost;
 
 public class MainActivity extends Activity {
 
     private WebView webView;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +29,21 @@ public class MainActivity extends Activity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
+        intent = getIntent();
 
-        webView.loadUrl("http://192.168.25.24/plin/");
+        String link = intent.getStringExtra(NotifyNewPost.POST_LINK);
+
+
+        if(link==null){
+            //abre index
+            webView.loadUrl("http://192.168.25.24/plin/");
+        }else{
+            //abre página de notificação
+            NotifyNewPost.excludeNotify();
+            webView.loadUrl(link);
+
+        }
+
 
     }
 
