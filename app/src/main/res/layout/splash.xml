@@ -13,6 +13,7 @@
         android:background="@drawable/plin_logo_splash_320dpi_fundo">
 
         <ImageView
+            android:contentDescription="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:id="@+id/imageView"
@@ -31,6 +32,7 @@
         >
 
         <ImageView
+            android:contentDescription="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="250dp"
             android:id="@+id/imageView2"

@@ -36,7 +36,7 @@ public class PostSPDAO implements PostDao {
         try{
             editor = sharedPref.edit();
             editor.putInt(c.getString(R.string.wp_id_last_post), post.getId());
-            editor.commit();
+            editor.apply();
 
         }catch (Exception e){
             throw new Exception(c.getString(R.string.erro_gravar_post));
