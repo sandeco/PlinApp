@@ -4,6 +4,7 @@
     <string name="app_name">Plin</string>
     <string name="url_site">http://192.168.25.24/plin/</string>
     <string name="last_post">lastPost</string>
+    <string name="wp_id_last_post">0</string>
 
 
     <string name="ulr_rest_last_post">http://192.168.25.24/plin/wp-json/wp/v2/posts?filter[posts_per_page]=1</string>
@@ -15,7 +16,8 @@
     <!-- STRING DE DESING -->
     <string name="plin_splash_loading">carregando</string>
     <string name="sem_conexao">Sem conexão</string>
-    <string name="erroConexao">Olá! parece que \n estamos sem conexão.\n Pode ativar sua internet?</string>
-
+    <string name="erroConexao">Olá!Parece que \n estamos sem conexão.\n Pode ativar sua internet?</string>
+    <string name="erroServer">Ops!\nParece que nosso servidor\nnão pode ser acessado.\nVamos tentar de novo?</string>
+    <string name="carregando_plin">Plin... carregando</string>
 
 </resources>
