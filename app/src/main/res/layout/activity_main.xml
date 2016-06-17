@@ -5,15 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+
+
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_erro"
         android:gravity="center"
-        android:id="@+id/layout_error"
+        android:id="@+id/layout_no_internet"
         android:visibility="invisible">
-
 
         <ImageView
             android:contentDescription="@string/app_name"
@@ -27,19 +30,52 @@
             android:layout_margin="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/erroConexao"
-            android:id="@+id/textView"
-            />
-
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
 
-    <WebView
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_erro"
+        android:gravity="center"
+        android:id="@+id/layout_erro_server"
+        android:visibility="invisible">
+
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:src="@drawable/server_out"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/erroServer"
+            android:textAlignment="center"
+            android:id="@+id/textView"/>
+
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/reload"
+            android:onClick="reload"/>
+
+    </LinearLayout>
+
+
+    <plin.net.br.plin.activities.MyWebView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/webView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>

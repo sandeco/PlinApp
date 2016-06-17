@@ -20,8 +20,7 @@ public class PostSPDAO implements PostDao {
     private SharedPreferences.Editor editor;
 
     public PostSPDAO() {
-        sharedPref = c.getSharedPreferences(
-                c.getString(R.string.wp_id_last_post), Context.MODE_PRIVATE);
+        sharedPref = c.getSharedPreferences(c.getString(R.string.wp_id_last_post), Context.MODE_PRIVATE);
     }
 
     @Override
@@ -36,6 +35,9 @@ public class PostSPDAO implements PostDao {
         try{
             editor = sharedPref.edit();
             editor.putInt(c.getString(R.string.wp_id_last_post), post.getId());
+
+
+
             editor.apply();
 
         }catch (Exception e){

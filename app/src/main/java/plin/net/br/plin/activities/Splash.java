@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -32,6 +33,8 @@ public class Splash extends Activity implements Runnable {
         //esperar 3seg e ir para main
         handler.postDelayed(this,3000);
 
+
+        Toast.makeText(this,"TESTE DE BRANCH",Toast.LENGTH_LONG);
 
         Intent it = new Intent(this, NewPostService.class);
         this.startService(it);

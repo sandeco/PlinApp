@@ -1,21 +1,48 @@
 <resources>
 
     <!--STRING DE CONFIGURAÇÕES E VARIÁVEIS DE SISTEMA-->
-    <string name="app_name">Plin</string>
-    <string name="url_site">http://192.168.25.24/plin/</string>
+    <string name="app_name" translatable="false">Plin</string>
+    <string name="url_site" translatable="false">http://plin.net.br/</string>
     <string name="last_post">lastPost</string>
+    <string name="wp_id_last_post" translatable="false">0</string>
 
 
-    <string name="ulr_rest_last_post">http://192.168.25.24/plin/wp-json/wp/v2/posts?filter[posts_per_page]=1</string>
+    <string name="ulr_rest_last_post" translatable="false">http://plin.net.br/wp-json/wp/v2/posts?filter[posts_per_page]=1</string>
 
 
     <!-- MENSAGENS DE ERRO-->
     <string name="erro_gravar_post">Erro ao tentar gravar um novo post</string>
 
+    <string name="shareWhatsapp">whatsapp://</string>
+    <string name="shareTwitter">https://twitter.com/</string>
+    <string name="shareGplus">https://plus.google.com/</string>
+    <string name="shareFacebook">https://www.facebook.com/</string>
+
+
+
+
+
+
     <!-- STRING DE DESING -->
     <string name="plin_splash_loading">carregando</string>
     <string name="sem_conexao">Sem conexão</string>
-    <string name="erroConexao">Olá! parece que \n estamos sem conexão.\n Pode ativar sua internet?</string>
+    <string name="erroConexao"> Olá! Parece que \n estamos sem conexão.\n Pode ativar sua internet?</string>
+    <string name="erroServer">Ops! Parece que nosso servidor não pode ser acessado. Vamos tentar de novo?</string>
+    <string name="carregando_plin">Plin... carregando</string>
+
+    <!-- LOADING STRINGS -->
+    <string name="load01">Plin... carregando</string>
+    <string name="load02">Plin... gotinhas de ideias</string>
+    <string name="load03">Plin... psicologia infantojuvenil</string>
+    <string name="load04">Plin... estamos buscando</string>
+    <string name="load05">Plin... vamos lá</string>
+
+    <!-- OFFLINE STRINGS -->
+    <string name="off01"> Olá! Parece que \n estamos sem conexão.\n Pode ativar sua internet?</string>
+    <string name="off02">Oi! precisamos de conexão \ncom internet para buscar \ninformações para você</string>
+    <string name="off03">Seu mobile está sem conexão. Pode conectar?</string>
+
+
 
 
 </resources>
