@@ -26,8 +26,17 @@
     <!-- STRING DE DESING -->
     <string name="plin_splash_loading">carregando</string>
     <string name="sem_conexao">Sem conexão</string>
-    <string name="erroConexao">Olá! Parece que \n estamos sem conexão.\n Pode ativar sua internet?</string>
+    <string name="erroConexao"> Olá! Parece que \n estamos sem conexão.\n Pode ativar sua internet?</string>
     <string name="erroServer">Ops! Parece que nosso servidor não pode ser acessado. Vamos tentar de novo?</string>
     <string name="carregando_plin">Plin... carregando</string>
+
+    <!-- LOADING STRINGS -->
+    <string name="load01">Plin... carregando</string>
+    <string name="load02">Plin... gotinhas de ideias</string>
+    <string name="load03">Plin... psicologia infantojuvenil</string>
+    <string name="load04">Plin... estamos buscando</string>
+    <string name="load05">Plin... vamos lá</string>
+
+
 
 </resources>

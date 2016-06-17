@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,7 +22,7 @@ import plin.net.br.plin.util.App;
 import plin.net.br.plin.util.InternetCheck;
 import plin.net.br.plin.util.NotifyNewPost;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements Runnable {
 
     private MyWebView webView;
     private Intent intent;
@@ -32,8 +33,14 @@ public class MainActivity extends Activity {
     private LinearLayout layoutErroServer;
 
     private final Activity activity = this;
+    private final Runnable runnable = this;
+
+
     private boolean erroFlag = false;
 
+    private Handler handler = new Handler();
+
+    private String linkAtual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +65,29 @@ public class MainActivity extends Activity {
 
     private void load(){
 
+
+        intent = getIntent();
+        linkAtual = intent.getStringExtra(NotifyNewPost.POST_LINK);
+
+        if (linkAtual == null) {
+            //abre index
+            linkAtual=getString(R.string.url_site);
+        } else {
+            //abre página de notificação
+            NotifyNewPost.excludeNotify();
+        }
+
+
         if(InternetCheck.isConnected()) {
-
-            intent = getIntent();
-
-            String link = intent.getStringExtra(NotifyNewPost.POST_LINK);
-
-            if (link == null) {
-                //abre index
-                webView.loadUrl(getString(R.string.url_site));
-            } else {
-                //abre página de notificação
-                NotifyNewPost.excludeNotify();
-                webView.loadUrl(link);
-            }
-
+            loadLinkAtual();
         }else{
             displayErroInternetOffline();
         }
+    }
+
+
+    private void loadLinkAtual(){
+        webView.loadUrl(linkAtual);
     }
 
 
@@ -101,51 +113,53 @@ public class MainActivity extends Activity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 // String not in Logger.
 
+                linkAtual = url;
 
-                if (url != null && InternetCheck.isConnected()) {
+
+                if(!InternetCheck.isConnected()){
+                    handler.postDelayed(runnable,3000);
+                    return true;
+                }
+
+
+                if(url==null){
+                    return true;
+                }else{
 
                     if(
-                            url.startsWith(getString(R.string.shareWhatsapp)) ||
-                                    url.startsWith(getString(R.string.shareTwitter)) ||
-                                    url.startsWith(getString(R.string.shareGplus)) ||
-                                    url.startsWith(getString(R.string.shareFacebook))
-                            ){
+                       url.startsWith(getString(R.string.shareWhatsapp)) ||
+                       url.startsWith(getString(R.string.shareTwitter)) ||
+                       url.startsWith(getString(R.string.shareGplus)) ||
+                       url.startsWith(getString(R.string.shareFacebook))
+                      ){
 
-                        view.getContext().startActivity(
-                                new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                        view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                         return true;//
-
-                    } else {
+                    }else{
                         return false; // não trata a url
                     }
-
                 }
-                return false;// não trata a url
             }
 
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-
-                if(erroFlag)
-                    displayNothing();
+                linkAtual = url;
 
 
-                erroFlag = false;
+                if (InternetCheck.isConnected()) {
+                    if (progressDialog == null) {
+                        // If no progress dialog, make one and set message
+                        progressDialog = new ProgressDialog(activity);
+                        progressDialog.setMessage(StringLoad.getString());
+                        progressDialog.show();
 
-                if (progressDialog == null) {
-                    // If no progress dialog, make one and set message
-                    progressDialog = new ProgressDialog(activity);
-                    progressDialog.setMessage(App.getContext().getString(R.string.carregando_plin));
-                    progressDialog.show();
-
-                    // Hide the webview while loading
-
+                    }
                 }
-
             }
 
+            //chama esse método para cada recurso carregado [imagens, css, html, som... etc]
             public void onLoadResource(WebView view, String url) {
                 // Check to see if there is a progress dialog
 
@@ -178,14 +192,38 @@ public class MainActivity extends Activity {
 
 
     /**TRATANDO O MONITORAMENTO DA INTERNET **/
+    boolean firstErroInternet = false;
+
     private void displayErroInternetOffline(){
+        firstErroInternet = true;
         webView.setVisibility(View.INVISIBLE);
         layoutErroServer.setVisibility(View.INVISIBLE);
         layoutNoInternet.setVisibility(View.VISIBLE);
+
+
+        handler.postDelayed(runnable,500);
     }
 
+    boolean toasted = false;
+
+    @Override
+    public void run() {
+        if(InternetCheck.isConnected()){
+            if(firstErroInternet)
+                firstErroInternet=false;
+            toasted = false;
+            displayNoError();
+            loadLinkAtual();
+        }else{
+            if(!toasted && !firstErroInternet ) {
+                Toast.makeText(this, getString(R.string.erroConexao), Toast.LENGTH_LONG).show();
+                toasted = true;
+            }
+            handler.postDelayed(runnable,5000);
+        }
 
 
+    }
 
 
 
@@ -229,5 +267,6 @@ public class MainActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
 }
