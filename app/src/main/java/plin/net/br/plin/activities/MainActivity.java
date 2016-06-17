@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebResourceError;
@@ -18,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import plin.net.br.plin.R;
-import plin.net.br.plin.util.App;
 import plin.net.br.plin.util.InternetCheck;
 import plin.net.br.plin.util.NotifyNewPost;
 
@@ -114,7 +112,7 @@ public class MainActivity extends Activity implements Runnable {
                 // String not in Logger.
 
                 linkAtual = url;
-
+                toasted = false;
 
                 if(!InternetCheck.isConnected()){
                     handler.postDelayed(runnable,3000);
@@ -152,7 +150,7 @@ public class MainActivity extends Activity implements Runnable {
                     if (progressDialog == null) {
                         // If no progress dialog, make one and set message
                         progressDialog = new ProgressDialog(activity);
-                        progressDialog.setMessage(StringLoad.getString());
+                        progressDialog.setMessage(StringLoad.getStringLoad());
                         progressDialog.show();
 
                     }
@@ -216,7 +214,7 @@ public class MainActivity extends Activity implements Runnable {
             loadLinkAtual();
         }else{
             if(!toasted && !firstErroInternet ) {
-                Toast.makeText(this, getString(R.string.erroConexao), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, StringLoad.getStringOffLine(), Toast.LENGTH_LONG).show();
                 toasted = true;
             }
             handler.postDelayed(runnable,5000);

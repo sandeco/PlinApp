@@ -10,11 +10,11 @@ import plin.net.br.plin.util.App;
  */
 public class StringLoad {
 
-    private static int min = 1;
-    private static int max = 5;
 
-    public static String getString(){
 
+    public static String getStringLoad(){
+        int min = 1;
+        int max = 5;
         Context c = App.getContext();
         int randomNum = min + (int)(Math.random() * max);
         String load = "";
@@ -34,4 +34,25 @@ public class StringLoad {
 
         return load;
     }
+
+    public static String getStringOffLine(){
+
+        int min = 1;
+        int max = 3;
+        Context c = App.getContext();
+        int randomNum = min + (int)(Math.random() * max);
+        String load = "";
+
+        if(randomNum==1){
+            load=c.getString(R.string.off01);
+        }else if(randomNum==2){
+            load=c.getString(R.string.off02);
+        }else if(randomNum==3) {
+            load = c.getString(R.string.off03);
+        }
+
+        return load;
+    }
+
+
 }

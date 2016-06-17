@@ -37,6 +37,12 @@
     <string name="load04">Plin... estamos buscando</string>
     <string name="load05">Plin... vamos lá</string>
 
+    <!-- OFFLINE STRINGS -->
+    <string name="off01"> Olá! Parece que \n estamos sem conexão.\n Pode ativar sua internet?</string>
+    <string name="off02">Oi! precisamos de conexão \ncom internet para buscar \ninformações para você</string>
+    <string name="off03">Seu mobile está sem conexão. Pode conectar?</string>
+
+
 
 
 </resources>
