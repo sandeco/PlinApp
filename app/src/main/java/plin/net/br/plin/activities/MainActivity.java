@@ -3,6 +3,7 @@ package plin.net.br.plin.activities;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import plin.net.br.plin.R;
 import plin.net.br.plin.util.App;
+import plin.net.br.plin.util.InternetCheck;
 import plin.net.br.plin.util.NotifyNewPost;
 
 public class MainActivity extends Activity {
@@ -49,29 +51,6 @@ public class MainActivity extends Activity {
     }
 
 
-    private void displayErroNoInternet(){
-        webView.setVisibility(View.INVISIBLE);
-        layoutErroServer.setVisibility(View.INVISIBLE);
-        layoutNoInternet.setVisibility(View.VISIBLE);
-    }
-
-    private void displayErroServer(){
-        webView.setVisibility(View.INVISIBLE);
-        layoutNoInternet.setVisibility(View.INVISIBLE);
-        layoutErroServer.setVisibility(View.VISIBLE);
-    }
-
-    private void displayNoError(){
-        layoutNoInternet.setVisibility(View.INVISIBLE);
-        layoutErroServer.setVisibility(View.INVISIBLE);
-        webView.setVisibility(View.VISIBLE);
-    }
-
-    private void displayNothing(){
-        layoutNoInternet.setVisibility(View.INVISIBLE);
-        layoutErroServer.setVisibility(View.INVISIBLE);
-        webView.setVisibility(View.INVISIBLE);
-    }
 
     public void reload(View v){
         load();
@@ -79,17 +58,23 @@ public class MainActivity extends Activity {
 
     private void load(){
 
-        intent = getIntent();
+        if(InternetCheck.isConnected()) {
 
-        String link = intent.getStringExtra(NotifyNewPost.POST_LINK);
+            intent = getIntent();
 
-        if(link==null){
-            //abre index
-            webView.loadUrl("http://192.168.25.24/plin/");
+            String link = intent.getStringExtra(NotifyNewPost.POST_LINK);
+
+            if (link == null) {
+                //abre index
+                webView.loadUrl(getString(R.string.url_site));
+            } else {
+                //abre página de notificação
+                NotifyNewPost.excludeNotify();
+                webView.loadUrl(link);
+            }
+
         }else{
-            //abre página de notificação
-            NotifyNewPost.excludeNotify();
-            webView.loadUrl(link);
+            displayErroInternetOffline();
         }
     }
 
@@ -115,30 +100,34 @@ public class MainActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 // String not in Logger.
-                if (url != null) {
+
+
+                if (url != null && InternetCheck.isConnected()) {
 
                     if(
-                            url.startsWith("whatsapp://") ||
-                                    url.startsWith("https://twitter.com/") ||
-                                    url.startsWith("https://plus.google.com/") ||
-                                    url.startsWith("https://www.facebook.com/")
+                            url.startsWith(getString(R.string.shareWhatsapp)) ||
+                                    url.startsWith(getString(R.string.shareTwitter)) ||
+                                    url.startsWith(getString(R.string.shareGplus)) ||
+                                    url.startsWith(getString(R.string.shareFacebook))
                             ){
 
                         view.getContext().startActivity(
                                 new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                        return true;
+                        return true;//
 
                     } else {
-                        return false;
+                        return false; // não trata a url
                     }
 
                 }
-                return false;
+                return false;// não trata a url
             }
 
 
-            public void onLoadResource(WebView view, String url) {
-                // Check to see if there is a progress dialog
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+
                 if(erroFlag)
                     displayNothing();
 
@@ -154,6 +143,12 @@ public class MainActivity extends Activity {
                     // Hide the webview while loading
 
                 }
+
+            }
+
+            public void onLoadResource(WebView view, String url) {
+                // Check to see if there is a progress dialog
+
             }
 
 
@@ -181,6 +176,40 @@ public class MainActivity extends Activity {
     }
 
 
+
+    /**TRATANDO O MONITORAMENTO DA INTERNET **/
+    private void displayErroInternetOffline(){
+        webView.setVisibility(View.INVISIBLE);
+        layoutErroServer.setVisibility(View.INVISIBLE);
+        layoutNoInternet.setVisibility(View.VISIBLE);
+    }
+
+
+
+
+
+
+
+
+
+
+    private void displayErroServer(){
+        webView.setVisibility(View.INVISIBLE);
+        layoutNoInternet.setVisibility(View.INVISIBLE);
+        layoutErroServer.setVisibility(View.VISIBLE);
+    }
+
+    private void displayNoError(){
+        layoutNoInternet.setVisibility(View.INVISIBLE);
+        layoutErroServer.setVisibility(View.INVISIBLE);
+        webView.setVisibility(View.VISIBLE);
+    }
+
+    private void displayNothing(){
+        layoutNoInternet.setVisibility(View.INVISIBLE);
+        layoutErroServer.setVisibility(View.INVISIBLE);
+        webView.setVisibility(View.INVISIBLE);
+    }
 
 
     // ATIVANDO BACK NO CELULAR PARA VOLTAR NO SITE
