@@ -5,8 +5,49 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+    <!--SPLASH -->
+    <LinearLayout
+        android:id="@+id/layout_splash"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
 
+         <ImageView
+                android:contentDescription="@string/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:id="@+id/imageView2"
+                android:src="@drawable/base02_320dpi"
+                />
+
+
+
+        <LinearLayout
+            android:id="@+id/middle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:layout_gravity="center_horizontal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/load04"
+                android:textAlignment="center"
+                android:id="@+id/loadString"/>
+
+        </LinearLayout>
+    </LinearLayout>
 
 
     <LinearLayout

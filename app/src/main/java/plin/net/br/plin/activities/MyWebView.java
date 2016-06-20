@@ -27,7 +27,7 @@ public class MyWebView extends WebView {
     @Override
     public void loadUrl(String url) {
         if(InternetCheck.isConnected())
-            super.loadUrl(url);
+            super.loadUrl(url+"/?mobile=true");
     }
 
 

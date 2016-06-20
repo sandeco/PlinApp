@@ -27,6 +27,7 @@ public class MainActivity extends Activity implements Runnable {
     private ProgressDialog progressDialog;
 
 
+    private LinearLayout layoutSplash;
     private LinearLayout layoutNoInternet;
     private LinearLayout layoutErroServer;
 
@@ -35,6 +36,7 @@ public class MainActivity extends Activity implements Runnable {
 
 
     private boolean erroFlag = false;
+    private boolean firstLoad = true;
 
     private Handler handler = new Handler();
 
@@ -48,6 +50,9 @@ public class MainActivity extends Activity implements Runnable {
         webView = (MyWebView) findViewById(R.id.webView);
         layoutNoInternet = (LinearLayout)findViewById(R.id.layout_no_internet);
         layoutErroServer = (LinearLayout)findViewById(R.id.layout_erro_server);
+        layoutSplash = (LinearLayout)findViewById(R.id.layout_splash);
+
+
 
         configWebView();
 
@@ -120,15 +125,15 @@ public class MainActivity extends Activity implements Runnable {
                 }
 
 
-                if(url==null){
+                if(linkAtual==null){
                     return true;
                 }else{
 
                     if(
-                       url.startsWith(getString(R.string.shareWhatsapp)) ||
-                       url.startsWith(getString(R.string.shareTwitter)) ||
-                       url.startsWith(getString(R.string.shareGplus)) ||
-                       url.startsWith(getString(R.string.shareFacebook))
+                       linkAtual.startsWith(getString(R.string.shareWhatsapp)) ||
+                       linkAtual.startsWith(getString(R.string.shareTwitter)) ||
+                       linkAtual.startsWith(getString(R.string.shareGplus)) ||
+                       linkAtual.startsWith(getString(R.string.shareFacebook))
                       ){
 
                         view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
@@ -147,7 +152,7 @@ public class MainActivity extends Activity implements Runnable {
 
 
                 if (InternetCheck.isConnected()) {
-                    if (progressDialog == null) {
+                    if (progressDialog == null && !firstLoad) {
                         // If no progress dialog, make one and set message
                         progressDialog = new ProgressDialog(activity);
                         progressDialog.setMessage(StringLoad.getStringLoad());
@@ -167,7 +172,12 @@ public class MainActivity extends Activity implements Runnable {
             public void onPageFinished(WebView view, String url) {
                 // Page is done loading;
                 // hide the progress dialog and show the webview
-                if (progressDialog.isShowing()) {
+
+                if(firstLoad) {
+                    firstLoad = false;
+                }
+
+                if (progressDialog!= null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                     progressDialog = null;
                 }
@@ -225,10 +235,6 @@ public class MainActivity extends Activity implements Runnable {
 
 
 
-
-
-
-
     private void displayErroServer(){
         webView.setVisibility(View.INVISIBLE);
         layoutNoInternet.setVisibility(View.INVISIBLE);
@@ -238,6 +244,7 @@ public class MainActivity extends Activity implements Runnable {
     private void displayNoError(){
         layoutNoInternet.setVisibility(View.INVISIBLE);
         layoutErroServer.setVisibility(View.INVISIBLE);
+        layoutSplash.setVisibility(View.INVISIBLE);
         webView.setVisibility(View.VISIBLE);
     }
 
