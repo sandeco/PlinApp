@@ -2,7 +2,7 @@
 
     <!--STRING DE CONFIGURAÇÕES E VARIÁVEIS DE SISTEMA-->
     <string name="app_name" translatable="false">Plin</string>
-    <string name="url_site" translatable="false">http://plin.net.br/</string>
+    <string name="url_site" translatable="false">http://plin.net.br/?plinApp=true</string>
     <string name="last_post">lastPost</string>
     <string name="wp_id_last_post" translatable="false">0</string>
 
