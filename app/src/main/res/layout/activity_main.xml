@@ -16,20 +16,42 @@
 
          <ImageView
                 android:contentDescription="@string/app_name"
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
                 android:id="@+id/imageView2"
-                android:src="@drawable/base02_320dpi"
+                android:src="@drawable/base02_updated"
                 />
 
-
-
         <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="#004D99"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/site"
+                android:textAlignment="center"
+                android:textSize="80dp"
+
+                />
+        </LinearLayout>
+
+
+
+
+    <LinearLayout
             android:id="@+id/middle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginTop="20dp">
 
 
             <ProgressBar
@@ -48,7 +70,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
 
     <LinearLayout
         android:orientation="vertical"
@@ -73,39 +94,38 @@
             android:text="@string/erroConexao"
             android:textAlignment="center"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_erro"
+            android:gravity="center"
+            android:id="@+id/layout_erro_server"
+            android:visibility="invisible">
 
+            <ImageView
+                android:contentDescription="@string/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:src="@drawable/server_out"/>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_erro"
-        android:gravity="center"
-        android:id="@+id/layout_erro_server"
-        android:visibility="invisible">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/erroServer"
+                android:textAlignment="center"
+                android:id="@+id/textView"/>
 
-        <ImageView
-            android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:src="@drawable/server_out"/>
+            <ImageView
+                android:contentDescription="@string/app_name"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/reload"
+                android:onClick="reload"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/erroServer"
-            android:textAlignment="center"
-            android:id="@+id/textView"/>
-
-        <ImageView
-            android:contentDescription="@string/app_name"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/reload"
-            android:onClick="reload"/>
+        </LinearLayout>
 
     </LinearLayout>
 

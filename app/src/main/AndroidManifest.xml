@@ -44,6 +44,7 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="YouWillNeverKillMe" />
             </intent-filter>
 
 

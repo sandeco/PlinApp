@@ -3,6 +3,7 @@ package plin.net.br.plin.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,4 +34,10 @@ public class NewPostService extends Service {
         return START_STICKY;
     }
 
+    @Override
+    public void onDestroy() {
+        Intent in = new Intent();
+        in.setAction("YouWillNeverKillMe");
+        sendBroadcast(in);
+    }
 }

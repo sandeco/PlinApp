@@ -6,7 +6,7 @@
     <string name="last_post">lastPost</string>
     <string name="wp_id_last_post" translatable="false">0</string>
 
-
+    <string name="site">www.plin.net.br</string>
     <string name="ulr_rest_last_post" translatable="false">http://plin.net.br/wp-json/wp/v2/posts?filter[posts_per_page]=1</string>
 
 
