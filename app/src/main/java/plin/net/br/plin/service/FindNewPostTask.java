@@ -1,6 +1,7 @@
 package plin.net.br.plin.service;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -80,20 +81,26 @@ public class FindNewPostTask implements Runnable, Response.ErrorListener, Respon
         while(started) {
             try {
                 thread.sleep(5 * 1000);
-                if (InternetCheck.isConnected()) {
-
-                    JsonArrayRequest request = new JsonArrayRequest(
-                            JSONURL, this, this);
-
-                    this.queue.add(request);
-                    this.queue.start();
-
-                }
+                getPostInternet();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public void getPostInternet(){
+        if (InternetCheck.isConnected()) {
+
+            JsonArrayRequest request = new JsonArrayRequest(
+                    JSONURL, this, this);
+
+            this.queue.add(request);
+            this.queue.start();
+
+        }
+
     }
 
 
@@ -113,6 +120,7 @@ public class FindNewPostTask implements Runnable, Response.ErrorListener, Respon
             if(posts.size()==1){
                 Post post = posts.get(0);
                 int idLastpost = postDao.getIdLastPost();
+
                 if(post.getId()>idLastpost) {
                     postDao.setLastPost(post);
                     NotifyNewPost.notify(post);

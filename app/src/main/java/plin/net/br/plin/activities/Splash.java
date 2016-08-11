@@ -13,6 +13,7 @@ import java.util.Random;
 import plin.net.br.plin.R;
 import plin.net.br.plin.service.FindNewPostTask;
 import plin.net.br.plin.service.NewPostService;
+import plin.net.br.plin.service.ScheduleServicePost;
 import plin.net.br.plin.service.SyncData;
 
 public class Splash extends Activity implements Runnable {
@@ -33,9 +34,6 @@ public class Splash extends Activity implements Runnable {
         //esperar 3seg e ir para main
         handler.postDelayed(this,3000);
 
-
-        Toast.makeText(this,"TESTE DE BRANCH",Toast.LENGTH_LONG);
-
         Intent it = new Intent(this, NewPostService.class);
         this.startService(it);
 
@@ -43,7 +41,6 @@ public class Splash extends Activity implements Runnable {
     }
 
     private void choiseBackground() {
-
 
     }
 

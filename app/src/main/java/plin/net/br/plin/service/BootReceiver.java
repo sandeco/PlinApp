@@ -13,9 +13,6 @@ public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
-        Toast.makeText(context,"Plin ativo",Toast.LENGTH_SHORT).show();
-
         Intent it = new Intent(context, NewPostService.class);
         context.startService(it);
     }

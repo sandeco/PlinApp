@@ -6,9 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
 
     <application
         android:name=".util.App"
@@ -19,7 +17,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.Splash"
             android:noHistory="true"
@@ -36,19 +34,32 @@
             android:enabled="true"
             android:exported="true" />
 
+        <service
+            android:name=".service.ScheduleServicePost"
+            android:enabled="true"
+            android:exported="true" />
+
+
         <receiver
             android:name=".service.BootReceiver"
             android:enabled="true"
             android:exported="true">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="YouWillNeverKillMe" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
             </intent-filter>
-
-
         </receiver>
+
+        <!--
+        <receiver
+            android:name=".service.MyScheduleReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+            </intent-filter>
+        </receiver>
+        -->
     </application>
 
 </manifest>

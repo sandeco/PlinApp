@@ -14,10 +14,6 @@ import plin.net.br.plin.util.App;
 
 public class NewPostService extends Service {
 
-
-
-
-
     public NewPostService() {
 
     }
@@ -36,8 +32,6 @@ public class NewPostService extends Service {
 
     @Override
     public void onDestroy() {
-        Intent in = new Intent();
-        in.setAction("YouWillNeverKillMe");
-        sendBroadcast(in);
+
     }
 }
